@@ -1,5 +1,8 @@
 package com.lannstark.lec17
 
+import com.lannstark.lec17.b.hello as helloB
+import com.lannstark.lec17.a.hello as helloA
+
 fun main() {
     var fruits = listOf(Fruit("apple", 1_000),
                         Fruit("banana", 2_000),
@@ -22,6 +25,10 @@ fun main() {
     filter(fruits, { fruit: Fruit -> fruit.name == "apple" })
     filter(fruits) { fruit: Fruit -> fruit.name == "apple" }
     filter(fruits) { it.name == "apple" }
+
+    // as import
+    helloA()
+    helloB()
 }
 
 private fun filter(fruits: List<Fruit>, filter: (Fruit) -> Boolean): List<Fruit> {
@@ -34,7 +41,10 @@ private fun filter(fruits: List<Fruit>, filter: (Fruit) -> Boolean): List<Fruit>
 
     return res
 }
-private fun filter2(fruits: List<Fruit>, filter: (Fruit) -> Boolean): List<Fruit> {
+
+typealias FruitFilter = (Fruit) -> Boolean
+
+private fun filter2(fruits: List<Fruit>, filter: FruitFilter): List<Fruit> {
     var res = mutableListOf<Fruit>()
     fruits.filter(filter)
     fruits.all(filter)
